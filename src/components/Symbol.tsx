@@ -2,13 +2,13 @@ import { FC } from "react"
 
 interface ISymbolProps {
     char: string
-    index: number
     active: boolean
+    error: boolean
 }
 
-export const Symbol: FC<ISymbolProps> = ({char, index, active}) => {
+export const Symbol: FC<ISymbolProps> = ({char, active, error}) => {
     return (
-        <span className={active ? "bg-success text-white p-1 rounded-2" : "text-dark"}>
+        <span className={error ? "bg-danger text-white p-1 rounded-2" : active ? "bg-success text-white p-1 rounded-2" : "text-dark"}>
             {char}
         </span>
     )
