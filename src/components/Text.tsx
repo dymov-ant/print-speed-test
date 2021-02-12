@@ -7,11 +7,19 @@ interface ITextProps {
     errorIndex: number | null
 }
 
-export const Text: FC<ITextProps> = ({symbols, activeIndex, errorIndex}) => {
+export const Text: FC<ITextProps> = ({ symbols, activeIndex, errorIndex }) => {
     return (
         <p className="fs-5 me-5">
             {
-                symbols.map((char, index) => <Symbol key={index} char={char} active={activeIndex === index} error={errorIndex === index}/>)
+                symbols.map((char, index) =>
+                    <Symbol
+                        key={index}
+                        char={char}
+                        active={activeIndex === index}
+                        error={errorIndex === index}
+                        success={activeIndex > index}
+                    />
+                )
             }
         </p>
     )

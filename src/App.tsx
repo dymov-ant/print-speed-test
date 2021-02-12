@@ -5,18 +5,21 @@ import { Statistics } from "./components/Statistics"
 export const App: FC = () => {
     const [activeIndex, setActiveIndex] = useState(0)
     const [errorIndex, setErrorIndex] = useState<number | null>(null)
-    const data = "Давно выяснено, что при оценке дизайна и "
+    const data = "Давно выяснено, что при оценке дизайна. Давно выяснено, что при оценке дизайна. Давно выяснено, что при оценке дизайна."
     const symbols = data.split("")
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const keyPressHandler = (event: KeyboardEvent) => {
-        if (event.key === symbols[activeIndex]) {
-            console.log("Верно")
-            setActiveIndex(prevState => prevState < symbols.length ? prevState + 1 : prevState)
-            setErrorIndex(null)
-        } else {
-            setErrorIndex(activeIndex)
-            console.log("Ошибка")
+        console.log(event.key)
+        if (event.key !== "Shift" && event.key !== "Backspace" && event.key !== "Escape" && event.key !== "Alt" && event.key !== "Control") {
+            if (event.key === symbols[activeIndex]) {
+                console.log("Верно")
+                setActiveIndex(prevState => prevState < symbols.length ? prevState + 1 : prevState)
+                setErrorIndex(null)
+            } else {
+                setErrorIndex(activeIndex)
+                console.log("Ошибка")
+            }
         }
     }
 
