@@ -1,6 +1,14 @@
 import { FC } from "react"
 
 export const Statistics: FC = () => {
+
+    const onStart = () => {
+
+    }
+    const onRestart = () => {
+
+    }
+
     return (
         <div className="border-start border-2 ps-3">
             <div>
@@ -11,9 +19,21 @@ export const Statistics: FC = () => {
                 <i className="fas fa-bullseye"/>
                 Точность
             </div>
-            <div>
-                <button type="button" className="btn btn-outline-primary btn-sm">Начать</button>
-                <button type="button" className="btn btn-outline-warning btn-sm">Заново</button>
+            <div className="d-flex">
+                <button
+                    onClick={onStart}
+                    onMouseDown={event => event.preventDefault()}
+                    className="btn btn-outline-success btn-sm me-1"
+                >
+                    Старт
+                </button>
+                <button
+                    onClick={onRestart}
+                    onMouseDown={event => event.preventDefault()}
+                    className="btn btn-outline-primary btn-sm"
+                >
+                    Заново
+                </button>
             </div>
         </div>
     )

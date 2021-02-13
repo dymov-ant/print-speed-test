@@ -1,13 +1,37 @@
-import { FC } from "react"
+import { FC, useEffect } from "react"
 import { Symbol } from "./Symbol"
+import { useDispatch, useSelector } from "react-redux"
+import { AppStateType } from "../redux/store"
+import { setActiveIndex, setErrorIndex } from "../redux/actions"
 
-interface ITextProps {
-    symbols: string[]
-    activeIndex: number
-    errorIndex: number | null
-}
+export const Text: FC = () => {
+    const symbols = useSelector((state: AppStateType) => state.symbols)
+    const activeIndex = useSelector((state: AppStateType) => state.activeIndex)
+    const errorIndex = useSelector((state: AppStateType) => state.errorIndex)
+    const dispatch = useDispatch()
 
-export const Text: FC<ITextProps> = ({ symbols, activeIndex, errorIndex }) => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const keyPressHandler = (event: KeyboardEvent) => {
+        if (activeIndex === symbols.length - 1) {
+            alert("Финиш")
+        }
+        if (event.key !== "Shift" && event.key !== "Backspace" && event.key !== "Escape" && event.key !== "Alt" && event.key !== "Control") {
+            if (event.key === symbols[activeIndex]) {
+                console.log("Верно")
+                dispatch(setActiveIndex(activeIndex + 1))
+                dispatch(setErrorIndex(null))
+            } else {
+                dispatch(setErrorIndex(activeIndex))
+                console.log("Ошибка")
+            }
+        }
+    }
+
+    useEffect(() => {
+        document.addEventListener("keydown", keyPressHandler)
+        return () => document.removeEventListener("keydown", keyPressHandler)
+    }, [keyPressHandler])
+
     return (
         <p className="fs-5 me-5">
             {

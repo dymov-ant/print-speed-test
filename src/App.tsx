@@ -1,39 +1,22 @@
-import React, { FC, useEffect, useState } from "react"
+import React, { FC, useEffect } from "react"
 import { Text } from "./components/Text"
 import { Statistics } from "./components/Statistics"
+import { useDispatch } from "react-redux"
+import { createSymbols } from "./redux/actions"
 
 export const App: FC = () => {
-    const [activeIndex, setActiveIndex] = useState(0)
-    const [errorIndex, setErrorIndex] = useState<number | null>(null)
-    const data = "Давно выяснено, что при оценке дизайна. Давно выяснено, что при оценке дизайна. Давно выяснено, что при оценке дизайна."
-    const symbols = data.split("")
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    const keyPressHandler = (event: KeyboardEvent) => {
-        console.log(event.key)
-        if (event.key !== "Shift" && event.key !== "Backspace" && event.key !== "Escape" && event.key !== "Alt" && event.key !== "Control") {
-            if (event.key === symbols[activeIndex]) {
-                console.log("Верно")
-                setActiveIndex(prevState => prevState < symbols.length ? prevState + 1 : prevState)
-                setErrorIndex(null)
-            } else {
-                setErrorIndex(activeIndex)
-                console.log("Ошибка")
-            }
-        }
-    }
+    const dispatch = useDispatch()
+    const data = "Давно выяснено, что при оценке дизайна. Давно выяснено, что при оценке дизайна. Давно выяснено, что при оценке дизайна. Давно выяснено, что при оценке дизайна. Давно выяснено, что при оценке дизайна. Давно выяснено, что при оценке дизайна."
 
     useEffect(() => {
-        document.addEventListener("keydown", keyPressHandler)
-        return () => document.removeEventListener("keydown", keyPressHandler)
-    }, [keyPressHandler])
-
+        dispatch(createSymbols(data))
+    }, [data])
 
     return (
         <div className="vh-100 bg-info">
             <div className="container d-flex justify-content-center pt-5">
                 <div className="d-flex justify-content-between bg-white rounded-3 p-5" style={{ width: "60rem" }}>
-                    <Text symbols={symbols} activeIndex={activeIndex} errorIndex={errorIndex}/>
+                    <Text/>
                     <Statistics/>
                 </div>
             </div>
