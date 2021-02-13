@@ -8,6 +8,7 @@ export const Statistics: FC = () => {
     const activeIndex = useSelector((state: AppStateType) => state.activeIndex)
     const errorsCount = useSelector((state: AppStateType) => state.errorsCount)
     const symbolsCount = useSelector((state: AppStateType) => state.symbols.length)
+    const truth = (symbolsCount - errorsCount) / symbolsCount * 100
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -22,6 +23,7 @@ export const Statistics: FC = () => {
 
     const onRestart = () => {
         dispatch(restart())
+        setTime(1)
     }
 
     return (
@@ -40,8 +42,11 @@ export const Statistics: FC = () => {
                     <i className="fas fa-bullseye"/> Точность
                 </div>
                 <div className="text-info">
-                    <span className="me-1"
-                          style={{ fontSize: "2rem" }}>{Math.floor((symbolsCount - errorsCount) / symbolsCount * 100)}</span>
+                    <span className="me-1" style={{ fontSize: "2rem" }}>
+                        {
+                            truth < 0 ? 0 : truth === 100 ? truth : truth.toFixed(1)
+                        }
+                    </span>
                     <span style={{ fontSize: "0.9rem" }}>%</span>
                 </div>
             </div>
