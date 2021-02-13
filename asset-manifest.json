@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.js": "/print-speed-test/static/js/main.f28bbcd4.chunk.js",
+    "main.js.map": "/print-speed-test/static/js/main.f28bbcd4.chunk.js.map",
+    "runtime-main.js": "/print-speed-test/static/js/runtime-main.885fadd3.js",
+    "runtime-main.js.map": "/print-speed-test/static/js/runtime-main.885fadd3.js.map",
+    "static/js/2.54b9b330.chunk.js": "/print-speed-test/static/js/2.54b9b330.chunk.js",
+    "static/js/2.54b9b330.chunk.js.map": "/print-speed-test/static/js/2.54b9b330.chunk.js.map",
+    "static/js/3.b5fdbf31.chunk.js": "/print-speed-test/static/js/3.b5fdbf31.chunk.js",
+    "static/js/3.b5fdbf31.chunk.js.map": "/print-speed-test/static/js/3.b5fdbf31.chunk.js.map",
+    "index.html": "/print-speed-test/index.html",
+    "static/js/2.54b9b330.chunk.js.LICENSE.txt": "/print-speed-test/static/js/2.54b9b330.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.885fadd3.js",
+    "static/js/2.54b9b330.chunk.js",
+    "static/js/main.f28bbcd4.chunk.js"
+  ]
+}
