@@ -5,6 +5,7 @@ import {
     RESTART,
     SET_ACTIVE_INDEX,
     SET_ERROR_INDEX,
+    SET_IS_LOADING,
     SET_START
 } from "./actions"
 
@@ -14,6 +15,7 @@ interface IRootState {
     errorIndex: number | null
     errors: number[]
     isStart: boolean
+    isLoading: boolean
 }
 
 const initialState: IRootState = {
@@ -21,7 +23,8 @@ const initialState: IRootState = {
     activeIndex: 0,
     errorIndex: null,
     errors: [],
-    isStart: false
+    isStart: false,
+    isLoading: false
 }
 
 export const rootReducer = (state = initialState, action: ActionsTypes) => {
@@ -56,7 +59,12 @@ export const rootReducer = (state = initialState, action: ActionsTypes) => {
                 ...state,
                 activeIndex: 0,
                 errorIndex: null,
-                errorsCount: 0
+                errors: []
+            }
+        case SET_IS_LOADING:
+            return {
+                ...state,
+                isLoading: action.isLoading
             }
         default:
             return state

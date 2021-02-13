@@ -1,10 +1,10 @@
 export const CREATE_SYMBOLS = "CREATE_SYMBOLS"
 export const SET_ACTIVE_INDEX = "SET_ACTIVE_INDEX"
 export const SET_ERROR_INDEX = "SET_ERROR_INDEX"
-export const ADD_ERRORS_COUNT = "ADD_ERRORS_COUNT"
 export const ADD_INDEX_TO_ERRORS = "ADD_INDEX_TO_ERRORS"
 export const SET_START = "SET_START"
 export const RESTART = "RESTART"
+export const SET_IS_LOADING = "SET_IS_LOADING"
 
 interface ICreateSymbols {
     type: typeof CREATE_SYMBOLS
@@ -35,7 +35,19 @@ interface IRestart {
     type: typeof RESTART
 }
 
-export type ActionsTypes = ICreateSymbols | ISetActiveIndex | ISetErrorIndex  | IAddIndexToErrors | ISetStart | IRestart
+interface ISetIsLoading {
+    type: typeof SET_IS_LOADING
+    isLoading: boolean
+}
+
+export type ActionsTypes =
+    ICreateSymbols
+    | ISetActiveIndex
+    | ISetErrorIndex
+    | IAddIndexToErrors
+    | ISetStart
+    | IRestart
+    | ISetIsLoading
 
 export const createSymbols = (text: string): ICreateSymbols => ({
     type: CREATE_SYMBOLS,
@@ -64,4 +76,9 @@ export const setStart = (isStart: boolean): ISetStart => ({
 
 export const restart = (): IRestart => ({
     type: RESTART
+})
+
+export const setIsLoading = (isLoading: boolean): ISetIsLoading => ({
+    type: SET_IS_LOADING,
+    isLoading
 })

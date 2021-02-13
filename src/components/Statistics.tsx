@@ -8,13 +8,16 @@ export const Statistics: FC = () => {
     const activeIndex = useSelector((state: AppStateType) => state.activeIndex)
     const errorsCount = useSelector((state: AppStateType) => state.errors.length)
     const symbolsCount = useSelector((state: AppStateType) => state.symbols.length)
+    const isLoading = useSelector((state: AppStateType) => state.isLoading)
     const truth = (symbolsCount - errorsCount) / symbolsCount * 100
     const speed = Math.floor(activeIndex / time * 60)
     const dispatch = useDispatch()
 
     useEffect(() => {
         const timer = setInterval(() => {
-            setTime(time + 1)
+            if (!isLoading) {
+                setTime(time + 1)
+            }
         }, 1000)
 
         return () => {
