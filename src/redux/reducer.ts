@@ -1,6 +1,6 @@
 import {
     ActionsTypes,
-    ADD_ERRORS_COUNT,
+    ADD_INDEX_TO_ERRORS,
     CREATE_SYMBOLS,
     RESTART,
     SET_ACTIVE_INDEX,
@@ -12,7 +12,7 @@ interface IRootState {
     symbols: string[]
     activeIndex: number
     errorIndex: number | null
-    errorsCount: number
+    errors: number[]
     isStart: boolean
 }
 
@@ -20,7 +20,7 @@ const initialState: IRootState = {
     symbols: [],
     activeIndex: 0,
     errorIndex: null,
-    errorsCount: 0,
+    errors: [],
     isStart: false
 }
 
@@ -41,10 +41,10 @@ export const rootReducer = (state = initialState, action: ActionsTypes) => {
                 ...state,
                 errorIndex: action.errorIndex
             }
-        case ADD_ERRORS_COUNT:
+        case ADD_INDEX_TO_ERRORS:
             return {
                 ...state,
-                errorsCount: state.errorsCount + 1
+                errors: [...state.errors, action.index]
             }
         case SET_START:
             return {

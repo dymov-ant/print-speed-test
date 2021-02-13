@@ -6,9 +6,10 @@ import { restart } from "../redux/actions"
 export const Statistics: FC = () => {
     const [time, setTime] = useState(1)
     const activeIndex = useSelector((state: AppStateType) => state.activeIndex)
-    const errorsCount = useSelector((state: AppStateType) => state.errorsCount)
+    const errorsCount = useSelector((state: AppStateType) => state.errors.length)
     const symbolsCount = useSelector((state: AppStateType) => state.symbols.length)
     const truth = (symbolsCount - errorsCount) / symbolsCount * 100
+    const speed = Math.floor(activeIndex / time * 60)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -33,7 +34,7 @@ export const Statistics: FC = () => {
                     <i className="fas fa-tachometer-alt me-1"/> Скорость
                 </div>
                 <div className="text-info">
-                    <span className="me-1" style={{ fontSize: "1.9rem" }}>{Math.floor(activeIndex / time * 60)}</span>
+                    <span className="me-1" style={{ fontSize: "1.9rem" }}>{speed}</span>
                     <span style={{ fontSize: "0.9rem" }}>зн./мин.</span>
                 </div>
             </div>

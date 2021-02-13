@@ -2,12 +2,13 @@ import { FC, useEffect } from "react"
 import { Symbol } from "./Symbol"
 import { useDispatch, useSelector } from "react-redux"
 import { AppStateType } from "../redux/store"
-import { addErrorsCount, setActiveIndex, setErrorIndex } from "../redux/actions"
+import { addIndexToErrors, setActiveIndex, setErrorIndex } from "../redux/actions"
 
 export const Text: FC = () => {
     const symbols = useSelector((state: AppStateType) => state.symbols)
     const activeIndex = useSelector((state: AppStateType) => state.activeIndex)
     const errorIndex = useSelector((state: AppStateType) => state.errorIndex)
+    const errors = useSelector((state: AppStateType) => state.errors)
     const dispatch = useDispatch()
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -21,7 +22,9 @@ export const Text: FC = () => {
                 dispatch(setErrorIndex(null))
             } else {
                 dispatch(setErrorIndex(activeIndex))
-                dispatch(addErrorsCount())
+                if (!errors.includes(activeIndex)) {
+                    dispatch(addIndexToErrors(activeIndex))
+                }
             }
         }
     }
@@ -32,7 +35,7 @@ export const Text: FC = () => {
     }, [keyPressHandler])
 
     return (
-        <p className="fs-5 me-4 d-block" style={{width: "730px"}}>
+        <p className="fs-5 me-4 d-block" style={{ width: "730px" }}>
             {
                 symbols.map((char, index) =>
                     <Symbol
