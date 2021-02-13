@@ -2,7 +2,7 @@ import { FC, useEffect } from "react"
 import { Symbol } from "./Symbol"
 import { useDispatch, useSelector } from "react-redux"
 import { AppStateType } from "../redux/store"
-import { setActiveIndex, setErrorIndex } from "../redux/actions"
+import { addErrorsCount, setActiveIndex, setErrorIndex } from "../redux/actions"
 
 export const Text: FC = () => {
     const symbols = useSelector((state: AppStateType) => state.symbols)
@@ -17,12 +17,11 @@ export const Text: FC = () => {
         }
         if (event.key !== "Shift" && event.key !== "Backspace" && event.key !== "Escape" && event.key !== "Alt" && event.key !== "Control") {
             if (event.key === symbols[activeIndex]) {
-                console.log("Верно")
                 dispatch(setActiveIndex(activeIndex + 1))
                 dispatch(setErrorIndex(null))
             } else {
                 dispatch(setErrorIndex(activeIndex))
-                console.log("Ошибка")
+                dispatch(addErrorsCount())
             }
         }
     }
@@ -33,7 +32,7 @@ export const Text: FC = () => {
     }, [keyPressHandler])
 
     return (
-        <p className="fs-5 me-5">
+        <p className="fs-5 me-4 d-block" style={{width: "730px"}}>
             {
                 symbols.map((char, index) =>
                     <Symbol

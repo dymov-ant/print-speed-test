@@ -25,7 +25,7 @@ export const App: FC = () => {
     return (
         <div className="vh-100 bg-info">
             <div className="container d-flex justify-content-center pt-5">
-                <div className="d-flex justify-content-between bg-white rounded-3 p-5" style={{ width: "60rem" }}>
+                <div className="d-flex justify-content-between bg-white rounded-3 p-5">
                     <Text/>
                     <Statistics/>
                 </div>

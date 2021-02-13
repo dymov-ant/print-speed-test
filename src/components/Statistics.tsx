@@ -1,29 +1,57 @@
-import { FC } from "react"
+import { FC, useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { AppStateType } from "../redux/store"
+import { restart } from "../redux/actions"
 
 export const Statistics: FC = () => {
-    const onRestart = () => {
+    const [time, setTime] = useState(1)
+    const activeIndex = useSelector((state: AppStateType) => state.activeIndex)
+    const errorsCount = useSelector((state: AppStateType) => state.errorsCount)
+    const symbolsCount = useSelector((state: AppStateType) => state.symbols.length)
+    const dispatch = useDispatch()
 
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setTime(time + 1)
+        }, 1000)
+
+        return () => {
+            clearInterval(timer)
+        }
+    }, [time])
+
+    const onRestart = () => {
+        dispatch(restart())
     }
 
     return (
-        <div className="border-start border-2 ps-3">
-            <div>
-                <i className="fas fa-tachometer-alt"/>
-                Скорость
+        <div className="border-start border-2 ps-2" style={{ width: "130px" }}>
+            <div className="mb-2">
+                <div className="text-muted d-flex align-items-center text-uppercase">
+                    <i className="fas fa-tachometer-alt me-1"/> Скорость
+                </div>
+                <div className="text-info">
+                    <span className="me-1" style={{ fontSize: "1.9rem" }}>{Math.floor(activeIndex / time * 60)}</span>
+                    <span style={{ fontSize: "0.9rem" }}>зн./мин.</span>
+                </div>
             </div>
-            <div>
-                <i className="fas fa-bullseye"/>
-                Точность
+            <div className="mb-2">
+                <div className="text-muted d-flex align-items-center text-uppercase">
+                    <i className="fas fa-bullseye"/> Точность
+                </div>
+                <div className="text-info">
+                    <span className="me-1"
+                          style={{ fontSize: "2rem" }}>{Math.floor((symbolsCount - errorsCount) / symbolsCount * 100)}</span>
+                    <span style={{ fontSize: "0.9rem" }}>%</span>
+                </div>
             </div>
-            <div className="d-flex">
-                <button
-                    onClick={onRestart}
-                    onMouseDown={event => event.preventDefault()}
-                    className="btn btn-outline-primary btn-sm"
-                >
-                    Заново
-                </button>
-            </div>
+            <button
+                onClick={onRestart}
+                onMouseDown={event => event.preventDefault()}
+                className="btn btn-outline-primary"
+            >
+                Заново
+            </button>
         </div>
     )
 }
