@@ -1,10 +1,6 @@
 import { FC } from "react"
 
 export const Statistics: FC = () => {
-
-    const onStart = () => {
-
-    }
     const onRestart = () => {
 
     }
@@ -20,13 +16,6 @@ export const Statistics: FC = () => {
                 Точность
             </div>
             <div className="d-flex">
-                <button
-                    onClick={onStart}
-                    onMouseDown={event => event.preventDefault()}
-                    className="btn btn-outline-success btn-sm me-1"
-                >
-                    Старт
-                </button>
                 <button
                     onClick={onRestart}
                     onMouseDown={event => event.preventDefault()}
