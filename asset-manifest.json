@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.js": "/print-speed-test/static/js/main.5f3092cc.chunk.js",
-    "main.js.map": "/print-speed-test/static/js/main.5f3092cc.chunk.js.map",
+    "main.js": "/print-speed-test/static/js/main.a539aed1.chunk.js",
+    "main.js.map": "/print-speed-test/static/js/main.a539aed1.chunk.js.map",
     "runtime-main.js": "/print-speed-test/static/js/runtime-main.b90c6d96.js",
     "runtime-main.js.map": "/print-speed-test/static/js/runtime-main.b90c6d96.js.map",
-    "static/js/2.30051ef9.chunk.js": "/print-speed-test/static/js/2.30051ef9.chunk.js",
-    "static/js/2.30051ef9.chunk.js.map": "/print-speed-test/static/js/2.30051ef9.chunk.js.map",
+    "static/js/2.ee8dd9fe.chunk.js": "/print-speed-test/static/js/2.ee8dd9fe.chunk.js",
+    "static/js/2.ee8dd9fe.chunk.js.map": "/print-speed-test/static/js/2.ee8dd9fe.chunk.js.map",
     "static/js/3.c4e0e39f.chunk.js": "/print-speed-test/static/js/3.c4e0e39f.chunk.js",
     "static/js/3.c4e0e39f.chunk.js.map": "/print-speed-test/static/js/3.c4e0e39f.chunk.js.map",
     "index.html": "/print-speed-test/index.html",
-    "static/js/2.30051ef9.chunk.js.LICENSE.txt": "/print-speed-test/static/js/2.30051ef9.chunk.js.LICENSE.txt"
+    "static/js/2.ee8dd9fe.chunk.js.LICENSE.txt": "/print-speed-test/static/js/2.ee8dd9fe.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.b90c6d96.js",
-    "static/js/2.30051ef9.chunk.js",
-    "static/js/main.5f3092cc.chunk.js"
+    "static/js/2.ee8dd9fe.chunk.js",
+    "static/js/main.a539aed1.chunk.js"
   ]
 }
