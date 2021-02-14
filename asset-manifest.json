@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/print-speed-test/static/js/main.a539aed1.chunk.js",
-    "main.js.map": "/print-speed-test/static/js/main.a539aed1.chunk.js.map",
+    "main.js": "/print-speed-test/static/js/main.a922f2f2.chunk.js",
+    "main.js.map": "/print-speed-test/static/js/main.a922f2f2.chunk.js.map",
     "runtime-main.js": "/print-speed-test/static/js/runtime-main.b90c6d96.js",
     "runtime-main.js.map": "/print-speed-test/static/js/runtime-main.b90c6d96.js.map",
     "static/js/2.ee8dd9fe.chunk.js": "/print-speed-test/static/js/2.ee8dd9fe.chunk.js",
@@ -14,6 +14,6 @@
   "entrypoints": [
     "static/js/runtime-main.b90c6d96.js",
     "static/js/2.ee8dd9fe.chunk.js",
-    "static/js/main.a539aed1.chunk.js"
+    "static/js/main.a922f2f2.chunk.js"
   ]
 }
