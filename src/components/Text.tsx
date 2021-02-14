@@ -2,7 +2,7 @@ import { FC, useEffect } from "react"
 import { Symbol } from "./Symbol"
 import { useDispatch, useSelector } from "react-redux"
 import { AppStateType } from "../redux/store"
-import { addIndexToErrors, createSymbols, setActiveIndex, setErrorIndex, setIsLoading } from "../redux/actions"
+import { addIndexToErrors, createSymbols, finish, setActiveIndex, setErrorIndex, setIsLoading } from "../redux/actions"
 import { http } from "../services/http"
 import { Spinner } from "./Spinner"
 
@@ -18,16 +18,35 @@ export const Text: FC = () => {
     const errors = useSelector((state: AppStateType) => state.errors)
     const isLoading = useSelector((state: AppStateType) => state.isLoading)
     const dispatch = useDispatch()
+    const DISABLE_KEYS = [
+        "Shift",
+        "Backspace",
+        "Escape",
+        "Alt",
+        "Control",
+        "Enter",
+        "Tab",
+        "CapsLock",
+        "ArrowDown",
+        "ArrowUp",
+        "ArrowRight",
+        "ArrowLeft",
+        "NumLock",
+        "Delete",
+        "PrintScreen",
+        "GroupNext"
+    ]
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const keyPressHandler = (event: KeyboardEvent) => {
-        if (activeIndex === symbols.length - 1) {
-            alert("Финиш")
-        }
-        if (event.key !== "Shift" && event.key !== "Backspace" && event.key !== "Escape" && event.key !== "Alt" && event.key !== "Control") {
+        if (!DISABLE_KEYS.includes(event.key)) {
             if (event.key === symbols[activeIndex]) {
-                dispatch(setActiveIndex(activeIndex + 1))
-                dispatch(setErrorIndex(null))
+                if (activeIndex === symbols.length - 1) {
+                    dispatch(finish())
+                } else {
+                    dispatch(setActiveIndex(activeIndex + 1))
+                    dispatch(setErrorIndex(null))
+                }
             } else {
                 dispatch(setErrorIndex(activeIndex))
                 if (!errors.includes(activeIndex)) {
@@ -44,6 +63,7 @@ export const Text: FC = () => {
             dispatch(setIsLoading(false))
             dispatch(createSymbols(data.text))
         }
+
         request()
     }, [])
 
@@ -53,7 +73,7 @@ export const Text: FC = () => {
     }, [keyPressHandler])
 
     return (
-        <p className="fs-5 me-4 d-block" style={{ width: "730px" }}>
+        <div className="fs-5 me-4 d-block" style={{ width: "730px" }}>
             {
                 isLoading
                     ? <Spinner/>
@@ -67,6 +87,6 @@ export const Text: FC = () => {
                         />
                     )
             }
-        </p>
+        </div>
     )
 }

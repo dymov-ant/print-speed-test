@@ -2,12 +2,18 @@ import {
     ActionsTypes,
     ADD_INDEX_TO_ERRORS,
     CREATE_SYMBOLS,
-    RESTART,
     SET_ACTIVE_INDEX,
     SET_ERROR_INDEX,
+    SET_FINISH,
     SET_IS_LOADING,
+    SET_RESULT,
     SET_START
 } from "./actions"
+
+export interface IResult {
+    speed: number
+    truth: number
+}
 
 interface IRootState {
     symbols: string[]
@@ -16,6 +22,8 @@ interface IRootState {
     errors: number[]
     isStart: boolean
     isLoading: boolean
+    result: IResult | null
+    isFinish: boolean
 }
 
 const initialState: IRootState = {
@@ -24,7 +32,9 @@ const initialState: IRootState = {
     errorIndex: null,
     errors: [],
     isStart: false,
-    isLoading: false
+    isLoading: false,
+    result: null,
+    isFinish: false
 }
 
 export const rootReducer = (state = initialState, action: ActionsTypes) => {
@@ -52,19 +62,29 @@ export const rootReducer = (state = initialState, action: ActionsTypes) => {
         case SET_START:
             return {
                 ...state,
-                isStart: action.isStart
-            }
-        case RESTART:
-            return {
-                ...state,
-                activeIndex: 0,
-                errorIndex: null,
-                errors: []
+                isStart: action.isStart,
+                isFinish: false,
+                result: null
             }
         case SET_IS_LOADING:
             return {
                 ...state,
                 isLoading: action.isLoading
+            }
+        case SET_FINISH:
+            return {
+                ...state,
+                symbols: [],
+                activeIndex: 0,
+                errorIndex: null,
+                errors: [],
+                isStart: false,
+                isFinish: true
+            }
+        case SET_RESULT:
+            return {
+                ...state,
+                result: action.result
             }
         default:
             return state

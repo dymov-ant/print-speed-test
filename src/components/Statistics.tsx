@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { AppStateType } from "../redux/store"
-import { restart } from "../redux/actions"
+import { setResult } from "../redux/actions"
 
 export const Statistics: FC = () => {
     const [time, setTime] = useState(1)
@@ -9,13 +9,14 @@ export const Statistics: FC = () => {
     const errorsCount = useSelector((state: AppStateType) => state.errors.length)
     const symbolsCount = useSelector((state: AppStateType) => state.symbols.length)
     const isLoading = useSelector((state: AppStateType) => state.isLoading)
-    const truth = (symbolsCount - errorsCount) / symbolsCount * 100
+    const truth = (symbolsCount - errorsCount) / symbolsCount * 100 || 0
     const speed = Math.floor(activeIndex / time * 60)
     const dispatch = useDispatch()
 
     useEffect(() => {
         const timer = setInterval(() => {
             if (!isLoading) {
+                dispatch(setResult({ speed, truth }))
                 setTime(time + 1)
             }
         }, 1000)
@@ -25,11 +26,6 @@ export const Statistics: FC = () => {
         }
     }, [time])
 
-    const onRestart = () => {
-        dispatch(restart())
-        setTime(1)
-    }
-
     return (
         <div className="border-start border-2 ps-2" style={{ width: "130px" }}>
             <div className="mb-2">
@@ -37,7 +33,7 @@ export const Statistics: FC = () => {
                     <i className="fas fa-tachometer-alt me-1"/> Скорость
                 </div>
                 <div className="text-info">
-                    <span className="me-1" style={{ fontSize: "1.9rem" }}>{speed}</span>
+                    <span className="me-1" style={{ fontSize: "2rem" }}>{speed}</span>
                     <span style={{ fontSize: "0.9rem" }}>зн./мин.</span>
                 </div>
             </div>
@@ -47,20 +43,18 @@ export const Statistics: FC = () => {
                 </div>
                 <div className="text-info">
                     <span className="me-1" style={{ fontSize: "2rem" }}>
-                        {
-                            truth < 0 ? 0 : truth === 100 ? truth : truth.toFixed(1)
-                        }
+                        {truth && (truth < 0 ? 0 : (truth ^ 0) === truth ? truth : truth.toFixed(1))}
                     </span>
                     <span style={{ fontSize: "0.9rem" }}>%</span>
                 </div>
             </div>
-            <button
-                onClick={onRestart}
-                onMouseDown={event => event.preventDefault()}
+            <a
+                href="/"
+                tabIndex={-1}
                 className="btn btn-outline-primary"
             >
                 Заново
-            </button>
+            </a>
         </div>
     )
 }
