@@ -24,7 +24,7 @@ export const Statistics: FC = () => {
         return () => {
             clearInterval(timer)
         }
-    }, [time])
+    }, [time, isLoading])
 
     return (
         <div className="border-start border-2 ps-2" style={{ width: "130px" }}>
